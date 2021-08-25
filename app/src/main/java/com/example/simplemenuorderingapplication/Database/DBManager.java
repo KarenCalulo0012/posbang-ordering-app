@@ -4,22 +4,18 @@ import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.simplemenuorderingapplication.Model.Categories;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class DBManager {
-    private DBHelper dbHelper;
-    private Context context;
-    private SQLiteDatabase database;
-
-    public DBManager(Context c) {
-        context = c;
-    }
-
-    public DBManager open() throws SQLException{
-        dbHelper = new DBHelper(context);
-        database = dbHelper.getWritableDatabase();
-        return this;
-    }
-
-    public void close(){
-        dbHelper.close();
-    }
+//    private SQLiteAdapter helper;
+//    private SQLiteDatabase db;
+//    List<Categories> categoryList = new ArrayList<>();
+//
+//    public DBManager(Context c) {
+//        helper = new SQLiteAdapter(c);
+//        db = helper.getWritableDatabase();
+//    }
 }

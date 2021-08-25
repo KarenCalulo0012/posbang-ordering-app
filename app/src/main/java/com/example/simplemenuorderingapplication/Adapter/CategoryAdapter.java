@@ -49,11 +49,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
 
     @Override
     public void onBindViewHolder(@NonNull @org.jetbrains.annotations.NotNull CategoryAdapter.MyViewHolder holder, int position) {
-        TextView textViewCategoryName = holder.textViewCategoryName;
-        ImageView imageViewCategoryPic = holder.imageViewCategoryPic;
-
-        textViewCategoryName.setText(dataSet.get(position).getCategoryName());
-        imageViewCategoryPic.setImageResource(dataSet.get(position).getImage());
+       Categories categories = dataSet.get(position);
+        holder.textViewCategoryName.setText(categories.getCategoryName());
+        holder.imageViewCategoryPic.setImageResource(categories.getImage());
 
     }
 

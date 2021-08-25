@@ -1,5 +1,7 @@
 package com.example.simplemenuorderingapplication.Model;
 
+import java.util.ArrayList;
+
 public class Categories {
     private int id;
     private String categoryName;
@@ -9,6 +11,15 @@ public class Categories {
         this.id = id;
         this.categoryName = categoryName;
         this.image = image;
+    }
+
+    @Override
+    public String toString() {
+        return "Categories{" +
+                "id=" + id +
+                ", categoryName='" + categoryName + '\'' +
+                ", image=" + image +
+                '}';
     }
 
     public int getId() {

@@ -6,12 +6,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.example.simplemenuorderingapplication.Adapter.CategoryAdapter;
+import com.example.simplemenuorderingapplication.Database.SQLiteAdapter;
 import com.example.simplemenuorderingapplication.Model.Categories;
 import com.example.simplemenuorderingapplication.Model.Data.CategoryData;
 import com.example.simplemenuorderingapplication.R;
@@ -24,7 +26,8 @@ public class CategoryActivity extends AppCompatActivity {
     private static ArrayList<Categories> data;
     private static RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    CategoryData categoryData;
+    SQLiteAdapter mydb;
+    Categories categories;
 
 
     @Override
@@ -36,6 +39,8 @@ public class CategoryActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.category_RV);
         layoutManager = new LinearLayoutManager(this);
 
+        mydb = new SQLiteAdapter(this);
+        SQLiteDatabase sqLiteDatabase = mydb.getWritableDatabase();
 
         data = new ArrayList<Categories>();
         for (int i = 0; i < CategoryData.categoryName.length;i++){
@@ -45,10 +50,12 @@ public class CategoryActivity extends AppCompatActivity {
                     CategoryData.categoryPic[i]
             ));
         }
+
         adapter = new CategoryAdapter(data);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(layoutManager);
     }
+
 
 
     public class MyOnClickListener implements View.OnClickListener {
@@ -68,10 +75,12 @@ public class CategoryActivity extends AppCompatActivity {
                     = (TextView) viewHolder.itemView.findViewById(R.id.textViewName);
             String selectedName = (String) textViewName.getText();
 
-            Log.e("KINEME", "********" + selectedName);
+            Log.w("KINEME", "********" + selectedName);
                     Intent intent = new Intent(CategoryActivity.this, MenuActivity.class)
                     .putExtra("category", selectedName);
             startActivity(intent);
+
+
 
         }
     }

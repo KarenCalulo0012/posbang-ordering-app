@@ -4,14 +4,22 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.simplemenuorderingapplication.R;
 
 public class OrderActivity extends AppCompatActivity {
-    TextView newString, price;
+    TextView newString, price, quantityNo;
     ImageView imageView;
+    ImageButton plus, minus;
+    Button addToCart;
+    int quantity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +28,10 @@ public class OrderActivity extends AppCompatActivity {
         newString = findViewById(R.id.selectedFoodTitle);
         price = findViewById(R.id.order_price);
         imageView = findViewById(R.id.selectedImage);
+        addToCart = findViewById(R.id.AddToCart_btn);
+        plus = findViewById(R.id.plus_imgbtn);
+        minus = findViewById(R.id.minus_imgbtn);
+        quantityNo = findViewById(R.id.noOrderText);
 
         Intent iin= getIntent();
         Bundle b = iin.getExtras();
@@ -33,5 +45,39 @@ public class OrderActivity extends AppCompatActivity {
             price.setText(k);
 //            imageView.setImageURI(l);
         }
+
+        plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                quantity++;
+                displayQuantity();
+            }
+        });
+
+        minus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (quantity == 0){
+                    Toast.makeText(getApplicationContext(), "CANT DECREASE TO ZERO", Toast.LENGTH_SHORT).show();
+                }else {
+                    quantity --;
+                    displayQuantity();
+                }
+            }
+        });
+
+
+
+        addToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(OrderActivity.this, OrderListActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void displayQuantity() {
+        quantityNo.setText(String.valueOf(quantity));
     }
 }

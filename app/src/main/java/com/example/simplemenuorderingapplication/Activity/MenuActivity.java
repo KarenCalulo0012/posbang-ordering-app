@@ -61,7 +61,6 @@ public class MenuActivity extends AppCompatActivity {
                     FoodData.foodPic[i]
 //                    FoodData.category_id[i]
             ));
-            Log.e("KINEME", "********" + data_food.toString());
         }
         adapter = new FoodAdapter(data_food);
         recyclerView.setAdapter(adapter);
