@@ -1,5 +1,6 @@
 package com.example.simplemenuorderingapplication.Adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyViewHolder> {
 
-    private ArrayList<Categories> dataSet;
+    private final ArrayList<Categories> dataSet;
 
     public CategoryAdapter(ArrayList<Categories> data) {
         this.dataSet = data;
@@ -29,8 +30,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            this.textViewCategoryName = (TextView) itemView.findViewById(R.id.textViewName);
-            this.imageViewCategoryPic = (ImageView) itemView.findViewById(R.id.foodImage);
+            this.textViewCategoryName = itemView.findViewById(R.id.textViewName);
+            this.imageViewCategoryPic = itemView.findViewById(R.id.foodImage);
+
+            String name = textViewCategoryName.getText().toString();
+            String pic = String.valueOf(imageViewCategoryPic.getDrawable());
         }
     }
 
@@ -43,8 +47,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
 
         view.setOnClickListener(CategoryActivity.myOnClickListener);
 
-        MyViewHolder myViewHolder = new MyViewHolder(view);
-        return myViewHolder;
+        return new MyViewHolder(view);
     }
 
     @Override

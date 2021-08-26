@@ -82,13 +82,16 @@ public class MenuActivity extends AppCompatActivity {
             String selectedName = (String) textViewName.getText();
             TextView price = (TextView) viewHolder.itemView.findViewById(R.id.foodPrice);
             String selectedPrice = (String) price.getText();
+            TextView tax = (TextView) viewHolder.itemView.findViewById(R.id.foodTax);
+            String selectedTax = (String) tax.getText();
             ImageView imageView = (ImageView) viewHolder.itemView.findViewById(R.id.foodImage) ;
 
             Log.e("FOOD", "********" + selectedName);
             Intent intent = new Intent(MenuActivity.this, OrderActivity.class)
                     .putExtra("food", selectedName)
                     .putExtra("price", selectedPrice)
-                    .putExtra("pic", String.valueOf(imageView));
+                    .putExtra("pic", String.valueOf(imageView))
+                    .putExtra("tax", String.valueOf(imageView));
             startActivity(intent);
 
         }

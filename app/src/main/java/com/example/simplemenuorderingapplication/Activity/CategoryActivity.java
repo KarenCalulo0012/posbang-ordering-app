@@ -13,7 +13,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.simplemenuorderingapplication.Adapter.CategoryAdapter;
-import com.example.simplemenuorderingapplication.Database.SQLiteAdapter;
+import com.example.simplemenuorderingapplication.Database.DatabaseHelper;
 import com.example.simplemenuorderingapplication.Model.Categories;
 import com.example.simplemenuorderingapplication.Model.Data.CategoryData;
 import com.example.simplemenuorderingapplication.R;
@@ -26,7 +26,7 @@ public class CategoryActivity extends AppCompatActivity {
     private static ArrayList<Categories> data;
     private static RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    SQLiteAdapter mydb;
+    DatabaseHelper mydb;
     Categories categories;
 
 
@@ -39,7 +39,7 @@ public class CategoryActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.category_RV);
         layoutManager = new LinearLayoutManager(this);
 
-        mydb = new SQLiteAdapter(this);
+        mydb = new DatabaseHelper(this);
         SQLiteDatabase sqLiteDatabase = mydb.getWritableDatabase();
 
         data = new ArrayList<Categories>();
@@ -51,9 +51,20 @@ public class CategoryActivity extends AppCompatActivity {
             ));
         }
 
+        Log.e("CATEGORY", "*************" + data);
+
         adapter = new CategoryAdapter(data);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(layoutManager);
+
+//        for (int k = 0; k< data.size(); k++){
+//            int id = data.get(k).getId();
+//            String name = data.get(k).getCategoryName();
+//            int pic = data.get(k).getImage();
+//            categories = new Categories(id,name,pic );
+//            mydb.insertCategory(categories);
+//        }
+
     }
 
 

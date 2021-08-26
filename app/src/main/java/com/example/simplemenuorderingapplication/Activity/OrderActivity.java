@@ -14,7 +14,7 @@ import android.widget.Toast;
 import com.example.simplemenuorderingapplication.R;
 
 public class OrderActivity extends AppCompatActivity {
-    TextView newString, price, quantityNo;
+    TextView newString, price, quantityNo, tax, total;
     ImageView imageView;
     ImageButton plus, minus;
     Button addToCart;
@@ -32,6 +32,8 @@ public class OrderActivity extends AppCompatActivity {
         plus = findViewById(R.id.plus_imgbtn);
         minus = findViewById(R.id.minus_imgbtn);
         quantityNo = findViewById(R.id.noOrderText);
+        tax = findViewById(R.id.order_tax);
+        total = findViewById(R.id.itemsTotalPrice);
 
         Intent iin= getIntent();
         Bundle b = iin.getExtras();
@@ -41,8 +43,12 @@ public class OrderActivity extends AppCompatActivity {
             String j =(String) b.get("food");
             String k = (String) b.get("price");
             String l = (String) b.get("pic");
+            String m = (String) b.get("tax");
+
             newString.setText(j);
             price.setText(k);
+            tax.setText(m);
+
 //            imageView.setImageURI(l);
         }
 

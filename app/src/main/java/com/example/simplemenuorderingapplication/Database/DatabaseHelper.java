@@ -2,8 +2,10 @@ package com.example.simplemenuorderingapplication.Database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.example.simplemenuorderingapplication.Model.Categories;
 import com.example.simplemenuorderingapplication.Model.Food;
@@ -11,7 +13,7 @@ import com.example.simplemenuorderingapplication.Model.Food;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SQLiteAdapter extends SQLiteOpenHelper {
+public class DatabaseHelper extends SQLiteOpenHelper {
 
     // Database Information
     static final String DB_NAME = "simpleOrderApp.db";
@@ -57,7 +59,7 @@ public class SQLiteAdapter extends SQLiteOpenHelper {
     List<Categories> categoriesList = new ArrayList<>();
 
 
-    public SQLiteAdapter(Context context) {
+    public DatabaseHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
 
     }
@@ -92,9 +94,18 @@ public class SQLiteAdapter extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(KEY_CATEGORY_NAME,categories.getCategoryName());
         values.put(KEY_CATEGORY_PIC,categories.getImage());
+
+        Log.e("ADD Data", "*******" + CATEGORY_TABLE);
+
         long res = db.insert(CATEGORY_TABLE, null, values);
         if (res ==-1) return false;
         else return true;
+    }
+
+    public Cursor getCategories (){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor data = db.rawQuery("SELECT * FROM " + CATEGORY_TABLE, null);
+        return data;
     }
 
 }
